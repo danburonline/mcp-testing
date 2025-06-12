@@ -46,6 +46,8 @@ uv sync
 uv run src/server/main.py
 ```
 
+This will start a local HTTP server that accepts SSEs.
+
 ## Inspect the MCP Server
 
 Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector) from inside the project directory:
@@ -54,7 +56,4 @@ Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector
 bunx @modelcontextprotocol/inspector
 ```
 
-And fill in the following values in the left-hand panel:
-
-- Command: `uv`
-- Arguments: `run src/server/main.py`
+And select Streamable HTTP as the transport type on the left-hand panel and enter the endpoint as shown when you start the MCP server from the previous step: `http://localhost:9000/mcp`.

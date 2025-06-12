@@ -10,4 +10,4 @@ def add(a: int, b: int) -> int:
 
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="streamable-http", host="localhost", port=9000)
