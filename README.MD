@@ -9,7 +9,6 @@ Goal to teach to students LLM APIs, MCPs, etc.
 Ensure you have uv installed. uv is a fast Python package installer and resolver.
 
 ```sh
-# Install uv using Homebrew on macOS
 brew install uv
 ```
 
@@ -25,13 +24,13 @@ uv --version
 
 ```sh
 # Create a virtual environment using uv
-uv venv --seed
+uv venv
 ```
 
 ## Installing all dependencies
 
 ```sh
-uv pip install -r pyproject.toml
+uv sync
 ```
 
 ## Example Usage
