@@ -31,6 +31,12 @@ uv venv
 source .venv/bin/activate
 ```
 
+## Installing all dependencies
+
+```bash
+uv pip install -r pyproject.toml
+```
+
 ### Deactivate Environment
 
 When you're done working:
