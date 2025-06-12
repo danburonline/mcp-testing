@@ -25,7 +25,7 @@ uv --version
 
 ```bash
 # Create a virtual environment using UV
-uv venv
+uv venv --seed
 
 # Activate the virtual environment
 source .venv/bin/activate
