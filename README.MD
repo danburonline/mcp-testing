@@ -4,6 +4,14 @@ Goal to teach to students LLM APIs, MCPs, etc.
 
 ## Prerequisites
 
+### Install Bun
+
+Ensure you have Bun installed. Bun is a fast Node.js alternative and drop-in replacement for NPM, tsc, etc.
+
+```sh
+brew install oven-sh/bun/bun
+```
+
 ### Install uv
 
 Ensure you have uv installed. uv is a fast Python package installer and resolver.
@@ -23,7 +31,6 @@ uv --version
 ### Create and Activate Virtual Environment
 
 ```sh
-# Create a virtual environment using uv
 uv venv
 ```
 
@@ -33,9 +40,21 @@ uv venv
 uv sync
 ```
 
-## Example Usage
+## Start the MCP Server
 
 ```sh
-# This will run the Python script with the Python version installed inside the virtua lenvironment
-uv run example.py
+uv run src/server/main.py
 ```
+
+## Inspect the MCP Server
+
+Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector) from inside the project directory:
+
+```sh
+bunx @modelcontextprotocol/inspector
+```
+
+And fill in the following values in the left-hand panel:
+
+- Command: `uv`
+- Arguments: `run src/server/main.py`
