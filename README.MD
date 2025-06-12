@@ -56,4 +56,4 @@ Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector
 bunx @modelcontextprotocol/inspector
 ```
 
-And select Streamable HTTP as the transport type on the left-hand panel and enter the endpoint as shown when you start the MCP server from the previous step: `http://localhost:9000/mcp`.
+And select Streamable HTTP as the transport type on the left-hand panel and enter the endpoint as shown when you start the MCP server from the previous step: `http://localhost:8080/mcp`.
