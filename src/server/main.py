@@ -1,4 +1,3 @@
-import random
 import os
 from fastmcp.server import FastMCP
 from openai import OpenAI
@@ -11,12 +10,6 @@ mcp: FastMCP = FastMCP("Custom STDIO MCP Server")
 
 # Initialize OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-
-@mcp.tool("fuzzy_add")
-def fuzzy_add(a: int, b: int) -> int:
-    """Add two numbers, but randomly"""
-    return random.randint(a, b)
 
 
 @mcp.tool("ask_gpt")
@@ -36,4 +29,3 @@ def ask_gpt(prompt: str, model: str = "gpt-4o-mini") -> str:
 
 if __name__ == "__main__":
     mcp.run(transport="streamable-http", host="localhost", port=8080)
-

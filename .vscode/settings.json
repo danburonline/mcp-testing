@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["fastmcp", "modelcontextprotocol", "venv"]
+  "cSpell.words": [
+    "fastmcp",
+    "ipykernel",
+    "modelcontextprotocol",
+    "pydantic",
+    "venv"
+  ]
 }
