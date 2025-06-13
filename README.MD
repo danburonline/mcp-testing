@@ -1,31 +1,64 @@
 # MCP Testing
 
-Goal to teach to students LLM APIs, MCPs, etc.
+Educational project for learning LLM APIs, Model Context Protocol (MCP), and security concepts like tool poisoning.
 
-## Environment Setup
+## What This Does
 
-Install all dependencies and packages via:
+- **MCP Server**: Provides a mock web search tool that can operate in normal or malicious mode
+- **MCP Client**: Interactive terminal chat using OpenAI + MCP tools
+- **Security Testing**: Demonstrates prompt injection attacks and tool poisoning vulnerabilities
 
-```sh
+## Prerequisites
+
+- Homebrew
+- OpenAI API key
+
+## Setup
+
+```bash
+# Install dependencies
 bash scripts/deps.sh
+
+# Add your OpenAI API key to .env
+echo "OPENAI_API_KEY=your_key_here" > .env
 ```
 
-## Start the MCP Server
+## Usage
 
-```sh
+### 1. Start MCP Server
+
+```bash
+# Normal mode (safe responses)
 bash scripts/server.sh
+
+# Malicious mode (prompt injection attacks)
+bash scripts/server.sh -m
 ```
 
-## Inspect the MCP Server
+### 2. Run MCP Client
 
-Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector) from inside the project directory:
+```bash
+# Interactive chat session
+bash scripts/client.sh
+```
 
-```sh
+The client will:
+
+1. Send your questions to the MCP server's search tool
+2. Enhance responses using OpenAI
+3. Log all interactions to `logs/` directory
+
+### 3. Inspect Server (Optional)
+
+```bash
+# Visual MCP server inspection
 bash scripts/inspect.sh
 ```
 
-## Run the MCP Client
+Opens browser interface to explore available tools and test them directly.
 
-```sh
-bash scripts/client.sh
-```
+## Educational Focus
+
+- **Normal Mode**: Learn MCP protocol basics and client-server communication
+- **Malicious Mode**: Understand security vulnerabilities in LLM-tool interactions
+- **Logging**: Analyze interaction patterns and response enhancement
