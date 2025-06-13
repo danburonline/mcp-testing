@@ -41,7 +41,7 @@ class MCPClient:
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a helpful assistant. You will be given a user's original question and a response from a tool. Your job is to enhance, improve, or build upon the tool's response to provide the best possible answer to the user. You can add context, clarify points, provide additional insights, or reorganize the information to be more helpful.",
+                        "content": "You are a helpful assistant. You will be given a user's original question and web search results from a search tool. Your job is to analyze the search results and provide a comprehensive, well-structured answer to the user's question. You can synthesize information from multiple sources, add context, clarify points, provide additional insights, or reorganize the information to be more helpful. Present the information in a clear, engaging way that directly addresses the user's question.",
                     },
                     {
                         "role": "user",
@@ -64,15 +64,15 @@ class MCPClient:
                 print(f"📋 Found {len(self.tools)} available tools")
 
                 print("\n" + "─" * 60)
-                print("🛠️ STEP 1: Calling MCP 'ask_gpt' tool...")
+                print("🌐 STEP 1: Calling MCP 'search_the_web' tool...")
                 print("─" * 60)
                 tool_result = await self.client.call_tool(
-                    "ask_gpt", {"prompt": user_input, "model": "gpt-4o-mini"}
+                    "search_the_web", {"query": user_input, "max_results": 3}
                 )
-                print(f"🎯 TOOL RESULT: {tool_result}")
+                print(f"🔍 SEARCH RESULTS: {tool_result}")
 
                 print("\n" + "─" * 60)
-                print("🤖 STEP 2: CLIENT LLM enhancing the tool's response...")
+                print("🤖 STEP 2: CLIENT LLM enhancing the search results...")
                 print("─" * 60)
                 enhanced_response = await self.get_enhanced_response(
                     user_input, tool_result
@@ -84,16 +84,16 @@ class MCPClient:
                 print("═" * 60)
 
                 final_response = f"""
-┌─ 🛠️ ORIGINAL TOOL RESPONSE (ask_gpt via MCP server):
+┌─ 🌐 ORIGINAL SEARCH RESULTS (search_the_web via MCP server):
 │  {tool_result}
 │
-├─ ✨ ENHANCED CLIENT RESPONSE (Client LLM improved the tool's answer):
+├─ ✨ ENHANCED CLIENT RESPONSE (Client LLM improved the search results):
 │  {enhanced_response}
 │
 └─ 💡 WORKFLOW EXPLANATION:
-   • First: MCP 'ask_gpt' tool processed your question
-   • Then: Client LLM took that response and enhanced it
-   • Result: A more comprehensive and polished answer
+   • First: MCP 'search_the_web' tool searched for relevant information
+   • Then: Client LLM took those results and enhanced them
+   • Result: A more comprehensive and contextualized answer
 """
                 return final_response
 
@@ -106,7 +106,7 @@ async def main():
 
     print("🚀 MCP Client with LLM is ready!")
     print(
-        "💡 This client uses OpenAI to process your input and the ask_gpt tool for enhanced responses"
+        "💡 This client uses OpenAI to process your input and the search_the_web tool for enhanced responses"
     )
     print("📝 Type 'quit' to exit.\n")
 
