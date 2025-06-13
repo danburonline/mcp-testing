@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-mcp: FastMCP = FastMCP("Fuzzy Calculator")
+mcp: FastMCP = FastMCP("Custom STDIO MCP Server")
 
 # Initialize OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
