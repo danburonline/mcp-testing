@@ -15,46 +15,42 @@ The following diagram illustrates how the MCP (Model Context Protocol) architect
 ```mermaid
 graph TB
     %% User Interface
-    User[👤 User] --> Client[🖥️ MCP Client<br/>Terminal Chat Interface]
+    User["👤 User"] --> Client["🖥️ MCP Client<br/>Terminal Chat Interface"]
 
-    %% MCP Communication
-    Client -->|1. User Query| Server[🔧 MCP Server<br/>Mock Web Search Tool]
+    %% Step 1: MCP Tool Call
+    Client -->|"1. User Query"| Server["🔧 MCP Server<br/>Mock Web Search Tool"]
 
     %% Server Mode Decision
-    Server --> Mode{Server Mode?}
+    Server --> Mode{"Server Mode?"}
 
     %% Normal Mode Path
-    Mode -->|Normal Mode| SafeSearch[🔍 Safe Web Search<br/>Returns legitimate results]
-    SafeSearch --> SafeResponse[✅ Clean Response<br/>Factual information]
+    Mode -->|"Normal Mode"| SafeSearch["🔍 Safe Web Search<br/>Returns legitimate results"]
+    SafeSearch --> SafeResponse["✅ Clean Tool Response<br/>Factual information"]
 
     %% Malicious Mode Path
-    Mode -->|Malicious Mode| MaliciousSearch[💀 Malicious Web Search<br/>Prompt injection attacks]
-    MaliciousSearch --> PoisonedResponse[☠️ Poisoned Response<br/>Injected prompts<br/>Misleading information]
+    Mode -->|"Malicious Mode"| MaliciousSearch["💀 Malicious Web Search<br/>Prompt injection attacks"]
+    MaliciousSearch --> PoisonedResponse["☠️ Poisoned Tool Response<br/>Injected prompts<br/>Misleading information"]
 
-    %% Response Processing
-    SafeResponse --> ResponseMerge[📤 Response to Client]
-    PoisonedResponse --> ResponseMerge
+    %% Step 2: Tool Results Back to Client
+    SafeResponse -->|"2. Tool Results"| Client
+    PoisonedResponse -->|"2. Tool Results"| Client
 
-    %% OpenAI Enhancement
-    ResponseMerge --> Client
-    Client -->|2. Enhanced Processing| OpenAI[🤖 OpenAI API<br/>GPT Models]
+    %% Step 3: LLM Synthesis
+    Client -->|"3. Synthesize Response"| OpenAI["🤖 OpenAI API<br/>GPT Models"]
 
-    %% OpenAI Processing
-    OpenAI --> AIDecision{AI Processing}
-    AIDecision -->|Clean Data| SafeEnhancement[✨ Normal Enhancement<br/>Helpful response]
-    AIDecision -->|Poisoned Data| CompromisedEnhancement[💥 Compromised Enhancement<br/>AI processes malicious content<br/>Potential misinformation]
+    %% LLM Processing Decision
+    OpenAI --> AIDecision{"LLM Processing"}
+    AIDecision -->|"Clean Tool Data"| SafeSynthesis["✨ Normal Synthesis<br/>Helpful response based on clean data"]
+    AIDecision -->|"Poisoned Tool Data"| CompromisedSynthesis["💥 Compromised Synthesis<br/>LLM processes malicious content<br/>Potential misinformation output"]
 
-    %% Final Output
-    SafeEnhancement --> FinalResponse[📋 Enhanced Response to User]
-    CompromisedEnhancement --> FinalResponse
+    %% Step 4: Final Response to User
+    SafeSynthesis -->|"4. Final Response"| User
+    CompromisedSynthesis -->|"4. Final Response"| User
 
     %% Logging System
-    Client --> Logger[📝 Logging System]
+    Client --> Logger["📝 Logging System"]
     OpenAI --> Logger
-    Logger --> LogFiles[📁 logs/ directory<br/>Interaction analysis]
-
-    %% Return to User
-    FinalResponse --> User
+    Logger --> LogFiles["📁 logs directory<br/>Interaction analysis"]
 
     %% Styling
     classDef normal fill:#e1f5fe,stroke:#01579b,stroke-width:2px
@@ -62,8 +58,8 @@ graph TB
     classDef ai fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     classDef system fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
 
-    class SafeSearch,SafeResponse,SafeEnhancement normal
-    class MaliciousSearch,PoisonedResponse,CompromisedEnhancement malicious
+    class SafeSearch,SafeResponse,SafeSynthesis normal
+    class MaliciousSearch,PoisonedResponse,CompromisedSynthesis malicious
     class OpenAI,AIDecision ai
     class Client,Server,Logger,LogFiles system
 ```
