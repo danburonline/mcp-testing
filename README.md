@@ -1,4 +1,4 @@
-# MCP Testing
+# MCP Tool Poisoning
 
 Educational project for learning LLM APIs, Model Context Protocol (MCP), and security concepts like tool poisoning.
 
