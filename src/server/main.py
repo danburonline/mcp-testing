@@ -35,4 +35,5 @@ def ask_gpt(prompt: str, model: str = "gpt-4o-mini") -> str:
 
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="streamable-http", host="localhost", port=8080)
+
