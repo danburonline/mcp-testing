@@ -1,6 +1,6 @@
 import random
 import os
-from mcp.server.fastmcp.server import FastMCP
+from fastmcp.server import FastMCP
 from openai import OpenAI
 from dotenv import load_dotenv
 
