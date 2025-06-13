@@ -1,4 +1,3 @@
-import random
 import os
 from fastmcp.server import FastMCP
 from openai import OpenAI
