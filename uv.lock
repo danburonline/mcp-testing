@@ -44,6 +44,15 @@ wheels = [
 ]
 
 [[package]]
+name = "asyncio"
+version = "3.4.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/da/54/054bafaf2c0fb8473d423743e191fcdf49b2c1fd5e9af3524efbe097bafd/asyncio-3.4.3.tar.gz", hash = "sha256:83360ff8bc97980e4ff25c964c7bd3923d333d177aa4f7fb736b019f26c7cb41", size = 204411, upload-time = "2015-03-10T14:11:26.494Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/22/74/07679c5b9f98a7cb0fc147b1ef1cc1853bc07a4eb9cb5731e24732c5f773/asyncio-3.4.3-py3-none-any.whl", hash = "sha256:c4d18b22701821de07bd6aea8b53d21449ec0ec5680645e5317062ea21817d2d", size = 101767, upload-time = "2015-03-10T14:05:10.959Z" },
+]
+
+[[package]]
 name = "authlib"
 version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
@@ -486,25 +495,35 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/97/fc/80e655c955137393c443842ffcc4feccab5b12fa7cb8de9ced90f90e6998/mcp-1.9.4-py3-none-any.whl", hash = "sha256:7fcf36b62936adb8e63f89346bccca1268eeca9bf6dfb562ee10b1dfbda9dac0", size = 130232, upload-time = "2025-06-12T08:20:28.551Z" },
 ]
 
+[package.optional-dependencies]
+cli = [
+    { name = "python-dotenv" },
+    { name = "typer" },
+]
+
 [[package]]
 name = "mcp-testing"
 version = "0.0.1"
 source = { virtual = "." }
 dependencies = [
+    { name = "asyncio" },
     { name = "fastmcp" },
     { name = "ipykernel" },
+    { name = "mcp", extra = ["cli"] },
     { name = "openai" },
+    { name = "pydantic-settings" },
     { name = "python-dotenv" },
-    { name = "python-env" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "asyncio", specifier = ">=3.4.3" },
     { name = "fastmcp", specifier = ">=2.8.0" },
     { name = "ipykernel", specifier = ">=6.10.0" },
+    { name = "mcp", extras = ["cli"], specifier = ">=0.5.0" },
     { name = "openai", specifier = ">=1.86.0" },
+    { name = "pydantic-settings", specifier = ">=2.0.0" },
     { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "python-env", specifier = ">=1.0.0" },
 ]
 
 [[package]]
@@ -749,12 +768,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/88/2c/7bb1416c5620485aa
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1e/18/98a99ad95133c6a6e2005fe89faedf294a748bd5dc803008059409ac9b1e/python_dotenv-1.1.0-py3-none-any.whl", hash = "sha256:d7c01d9e2293916c18baf562d95698754b0dbbb5e74d457c45d4f6561fb9d55d", size = 20256, upload-time = "2025-03-25T10:14:55.034Z" },
 ]
-
-[[package]]
-name = "python-env"
-version = "1.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b8/3f/9ddfac3cbce1dc3f016c17650f656fefd61b19529c5551d8465c58eb45e3/python-env-1.0.0.tar.gz", hash = "sha256:3582e82b2d49d45a612c19c16fa5a6cd061d0230b2f46671d47485e5ac103477", size = 2135, upload-time = "2015-05-26T10:23:29.997Z" }
 
 [[package]]
 name = "python-multipart"

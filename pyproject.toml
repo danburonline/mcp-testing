@@ -1,13 +1,15 @@
 [project]
 name = "mcp-testing"
 version = "0.0.1"
-description = ""
+description = "Simple repo for testing MCP servers, clients, etc."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastmcp>=2.8.0",
+    "mcp[cli]>=0.5.0",
+    "pydantic-settings>=2.0.0",
     "ipykernel>=6.10.0",
     "openai>=1.86.0",
     "python-dotenv>=1.1.0",
-    "python-env>=1.0.0",
+    "asyncio>=3.4.3",
 ]
