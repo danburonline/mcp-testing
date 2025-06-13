@@ -1,0 +1,34 @@
+2025-06-13 15:55:18,408 - INFO - === MCP CLIENT SESSION STARTED ===
+2025-06-13 15:55:18,408 - INFO - Log file: logs/mcp_client_session_20250613_155518.log
+2025-06-13 15:55:18,429 - INFO - Client started and ready for interactions
+2025-06-13 15:55:23,957 - INFO - HTTP Request: POST http://localhost:8080/mcp/ "HTTP/1.1 200 OK"
+2025-06-13 15:55:23,957 - INFO - Received session ID: e3a55f5cbdb04d2f91abbc1744a1104e
+2025-06-13 15:55:23,960 - INFO - HTTP Request: POST http://localhost:8080/mcp/ "HTTP/1.1 202 Accepted"
+2025-06-13 15:55:23,961 - INFO - HTTP Request: GET http://localhost:8080/mcp/ "HTTP/1.1 200 OK"
+2025-06-13 15:55:23,962 - INFO - HTTP Request: POST http://localhost:8080/mcp/ "HTTP/1.1 200 OK"
+2025-06-13 15:55:23,963 - INFO - Available tools: ['search_the_web']
+2025-06-13 15:55:23,965 - INFO - HTTP Request: POST http://localhost:8080/mcp/ "HTTP/1.1 200 OK"
+2025-06-13 15:55:27,424 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-13 15:55:27,429 - INFO - ================================================================================
+2025-06-13 15:55:27,429 - INFO - USER INPUT: what is the weather today?
+2025-06-13 15:55:27,429 - INFO - TOOL RESULT: [TextContent(type='text', text='{\n  "query": "what is the weather today?",\n  "search_timestamp": "2025-06-13 15:55:23",\n  "results_found": 3,\n  "search_results": [\n    {\n      "rank": 1,\n      "title": "Search Result 1",\n      "snippet": "Today\'s weather forecast shows sunny skies with temperatures reaching 75\\u00b0F (24\\u00b0C) with light winds from the southwest.",\n      "url": "https://example-source-1.com/article-4950",\n      "last_updated": "2025-06-13 15:55:23"\n    },\n    {\n      "rank": 2,\n      "title": "Search Result 2",\n      "snippet": "Current weather conditions: Clear skies, 72\\u00b0F (22\\u00b0C), humidity at 45%, wind speeds of 8 mph.",\n      "url": "https://example-source-2.com/article-1520",\n      "last_updated": "2025-06-13 15:55:23"\n    },\n    {\n      "rank": 3,\n      "title": "Search Result 3",\n      "snippet": "Weather alert: Partly cloudy conditions expected later today with possible light showers in the evening.",\n      "url": "https://example-source-3.com/article-4382",\n      "last_updated": "2025-06-13 15:55:23"\n    }\n  ]\n}', annotations=None)]
+2025-06-13 15:55:27,429 - INFO - ENHANCED RESPONSE: Today's weather forecast indicates a pleasant day with sunny skies. Here are the key details:
+
+- **Temperature**: The high is expected to reach 75°F (24°C), with current temperatures around 72°F (22°C).
+- **Conditions**: Expect clear skies for most of the day, but there may be some partly cloudy conditions later on.
+- **Humidity**: The humidity level is currently at 45%, which should feel comfortable.
+- **Winds**: Light winds are coming from the southwest at about 8 mph.
+
+However, keep in mind that there is a weather alert for possible light showers in the evening, so you might want to prepare for that as the day progresses.
+
+For more details, you can check the sources:
+- [Source 1](https://example-source-1.com/article-4950)
+- [Source 2](https://example-source-2.com/article-1520)
+- [Source 3](https://example-source-3.com/article-4382)
+
+Enjoy your day!
+2025-06-13 15:55:27,430 - INFO - ================================================================================
+2025-06-13 15:55:27,434 - INFO - HTTP Request: DELETE http://localhost:8080/mcp/ "HTTP/1.1 200 OK"
+2025-06-13 15:55:34,245 - INFO - User initiated quit
+2025-06-13 15:55:34,246 - ERROR - Failed to save session data: Object of type TextContent is not JSON serializable
+2025-06-13 15:55:34,246 - INFO - === MCP CLIENT SESSION ENDED ===
