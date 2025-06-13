@@ -1,4 +1,3 @@
-import os
 from fastmcp.server import FastMCP
 import json
 import random
