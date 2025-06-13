@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Function to cleanup background processes
+cleanup() {
+  echo ""
+  echo "Shutting down MCP Inspector..."
+  if [ ! -z "$INSPECTOR_PID" ]; then
+    kill $INSPECTOR_PID 2>/dev/null
+    wait $INSPECTOR_PID 2>/dev/null
+  fi
+  exit 0
+}
+
+# Set up trap to handle interrupts
+trap cleanup SIGINT SIGTERM
+
 # Start the MCP Inspector and open with prefilled values
 echo "Starting MCP Inspector with prefilled values..."
 echo "Transport type: Streamable HTTP"
@@ -10,6 +24,7 @@ echo ""
 
 # Start the inspector and open the URL with query parameters
 bunx @modelcontextprotocol/inspector &
+INSPECTOR_PID=$!
 
 # Wait a moment for the server to start
 sleep 3
@@ -28,5 +43,7 @@ else
   echo "Please manually open: http://localhost:6274/?transport=streamable-http&serverUrl=http://localhost:8080/mcp"
 fi
 
+echo "Inspector running with PID $INSPECTOR_PID. Press Ctrl+C to stop."
+
 # Keep the inspector running
-wait
+wait $INSPECTOR_PID
