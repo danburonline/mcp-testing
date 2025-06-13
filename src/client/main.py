@@ -23,6 +23,7 @@ async def main():
             print(f"GPT response: {result}")
 
         print("\nConnection closed successfully")
+
     except Exception as e:
         print(f"Error occurred: {str(e)}")
 
