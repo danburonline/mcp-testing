@@ -1,22 +1,43 @@
 import asyncio
-from fastmcp import Client, FastMCP
+from fastmcp import Client
 
-# Example transports (more details in Transports page)
-server_instance = FastMCP(name="MCPTestServer") # In-memory server
-http_url = "http://localhost:8080/mcp"        # HTTP server URL
-server_script = "main.py"         # Path to a Python server file
+# Connect to the server using HTTP transport
+client: Client = Client("http://localhost:8080/mcp/")
 
-# Client automatically infers the transport type
-# client_in_memory = Client(server_instance)
-client_http = Client(http_url)
 
-# client_stdio = Client(server_script)
+async def main():
+    try:
+        # print("Connecting to server...")
+        async with client:
+            # print(f"✓ Successfully connected to server")
+            # print(f"Connection status: {client.is_connected()}")
 
-# print(client_in_memory.transport)
-print(client_http.transport)
-# print(client_stdio.transport)
+            # List available tools
+            tools = await client.list_tools()
+            print(f"\nFound {len(tools)} available tools:")
+            for tool in tools:
+                print(f"- {tool.name}: {tool.description}")
 
-# Expected Output (types may vary slightly based on environment):
-# <FastMCP(server='TestServer')>
-# <StreamableHttp(url='https://example.com/mcp')>
-# <PythonStdioTransport(command='python', args=['/path/to/your/my_mcp_server.py'])>
+            # Test fuzzy_add
+            print("\nTesting fuzzy_add:")
+            result = await client.call_tool("fuzzy_add", {"a": 1, "b": 10})
+            print(f"Random number between 1 and 10: {result}")
+
+            # Test ask_gpt
+            print("\nTesting ask_gpt:")
+            result = await client.call_tool(
+                "ask_gpt",
+                {
+                    "prompt": "What is the capital of Switzerland?",
+                    "model": "gpt-4o-mini",
+                },
+            )
+            print(f"GPT response: {result}")
+
+        print("\nConnection closed successfully")
+    except Exception as e:
+        print(f"Error occurred: {str(e)}")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
