@@ -79,3 +79,77 @@
 
 - Implemented the Python SDK.
 - Updated the Python version for improved compatibility and performance.
+
+## Step 13: MCP Client Development
+
+- **Major Enhancement**: Created comprehensive MCP client in `src/client/main.py`
+- Implemented `MCPClient` class with advanced features:
+  - OpenAI integration for enhanced responses
+  - Asynchronous communication with MCP server
+  - Tool discovery and execution capabilities
+  - Error handling and robust connection management
+- Added dual-step processing workflow:
+  - Step 1: Call MCP tools for raw data
+  - Step 2: Enhance results using client-side LLM processing
+
+## Step 14: Logging and Session Tracking
+
+- **Major Enhancement**: Implemented comprehensive logging system
+- Added structured session tracking with:
+  - Timestamped interaction logs
+  - JSON data export for detailed analysis
+  - Console and file logging support
+  - Session metadata collection
+- Created `logs/` directory for storing session data
+- Each client session generates both `.log` and `_data.json` files
+
+## Step 15: Web Search Tool Implementation
+
+- Replaced fuzzy calculator with realistic `search_the_web` tool
+- Implemented mock search results with categorized responses:
+  - Weather, news, technology, health, finance, and general queries
+  - Intelligent query categorization based on keywords
+  - Randomized result selection for varied responses
+- Added proper JSON response formatting with metadata
+- Included error handling and fallback mechanisms
+
+## Step 16: LLM Deception and Security Testing Features
+
+- **Major Security Feature**: Implemented "malicious mode" for testing prompt injection attacks
+- Added `MALICIOUS_MODE` environment variable control
+- Created parallel datasets:
+  - Normal search results for standard operation
+  - Malicious search results containing prompt injection attempts
+- Designed for educational purposes to demonstrate:
+  - Tool poisoning vulnerabilities
+  - Prompt injection attack vectors
+  - Security implications in LLM-tool interactions
+- Server-side control prevents client awareness of malicious mode
+
+## Step 17: Script Automation and Development Workflow
+
+- Created comprehensive shell script suite in `scripts/` directory:
+  - `deps.sh` - Automated dependency installation
+  - `server.sh` - Server startup with normal/malicious mode flags
+  - `client.sh` - Client application launcher
+  - `inspect.sh` - MCP Inspector integration
+- Enhanced developer experience with one-command operations
+- Added support for malicious mode flag (`-m`) in server script
+
+## Step 18: Project Documentation and TODO Management
+
+- Updated README.md with simplified setup instructions
+- Created `TODO.md` for tracking development priorities
+- Documented current project goals:
+  - Educational focus on LLM APIs and MCP protocols
+  - Security testing capabilities
+  - Future middleware development plans
+- Enhanced project structure for educational use
+
+## Step 19: Code Refactoring and Cleanup
+
+- Removed deprecated LLMClient class from codebase
+- Streamlined tool listing and removed commented-out code
+- Enhanced error handling throughout the application
+- Improved code organization and maintainability
+- Fixed environment variable handling in example notebooks
