@@ -1,5 +1,5 @@
 import random
-from mcp.server.fastmcp.server import FastMCP
+from fastmcp.server import FastMCP
 
 mcp: FastMCP = FastMCP("Fuzzy Calculator")
 
