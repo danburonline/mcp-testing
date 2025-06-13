@@ -28,3 +28,6 @@ For more detailed information about today's weather or updates throughout the da
 Overall, it looks like a nice day ahead, with some potential for evening showers. Enjoy your day!
 2025-06-13 15:43:22,182 - INFO - ================================================================================
 2025-06-13 15:43:22,186 - INFO - HTTP Request: DELETE http://localhost:8080/mcp/ "HTTP/1.1 200 OK"
+2025-06-13 15:44:40,456 - INFO - User initiated quit
+2025-06-13 15:44:40,457 - ERROR - Failed to save session data: Object of type TextContent is not JSON serializable
+2025-06-13 15:44:40,457 - INFO - === MCP CLIENT SESSION ENDED ===

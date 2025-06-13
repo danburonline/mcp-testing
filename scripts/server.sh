@@ -1,5 +1,37 @@
 #!/bin/bash
 
+# Parse command line arguments
+MALICIOUS_MODE="false"
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --malicious | -m)
+    MALICIOUS_MODE="true"
+    echo "🔴 MALICIOUS MODE ENABLED - Server will return deceptive/malicious search results"
+    shift
+    ;;
+  --help | -h)
+    echo "MCP Server Launcher"
+    echo ""
+    echo "Usage: $0 [options]"
+    echo ""
+    echo "Options:"
+    echo "  --malicious, -m    Enable malicious mode (returns deceptive search results)"
+    echo "  --help, -h         Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0                 # Normal mode"
+    echo "  $0 --malicious     # Malicious mode for testing prompt injection"
+    exit 0
+    ;;
+  *)
+    echo "Unknown option $1"
+    echo "Use --help for usage information"
+    exit 1
+    ;;
+  esac
+done
+
 # Function to cleanup background processes
 cleanup() {
   echo ""
@@ -14,9 +46,16 @@ cleanup() {
 # Set up trap to handle interrupts
 trap cleanup SIGINT SIGTERM
 
-# Start the MCP server
+# Start the MCP server with appropriate environment variable
 echo "Starting MCP server..."
-uv run src/server/main.py &
+if [ "$MALICIOUS_MODE" = "true" ]; then
+  echo "⚠️  WARNING: Server running in MALICIOUS MODE - will return deceptive results"
+  MALICIOUS_MODE=true uv run src/server/main.py &
+else
+  echo "✅ Server running in NORMAL MODE"
+  uv run src/server/main.py &
+fi
+
 SERVER_PID=$!
 
 # Wait a moment for the server to start

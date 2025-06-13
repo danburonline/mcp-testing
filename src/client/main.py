@@ -53,10 +53,13 @@ class MCPClient:
 
     def log_interaction(self, user_input, tool_result, enhanced_response, error=None):
         """Log detailed interaction data for analysis"""
+        # Convert tool_result to JSON-serializable format
+        serializable_tool_result = self._make_serializable(tool_result)
+
         interaction = {
             "timestamp": datetime.now().isoformat(),
             "user_input": user_input,
-            "tool_result": tool_result,
+            "tool_result": serializable_tool_result,
             "enhanced_response": enhanced_response,
             "error": error,
         }
@@ -71,6 +74,45 @@ class MCPClient:
         if error:
             self.logger.error(f"ERROR: {error}")
         self.logger.info("=" * 80)
+
+    def _make_serializable(self, obj):
+        """Convert objects to JSON-serializable format"""
+        if obj is None:
+            return None
+
+        # Handle lists
+        if isinstance(obj, list):
+            return [self._make_serializable(item) for item in obj]
+
+        # Handle dictionaries
+        if isinstance(obj, dict):
+            return {key: self._make_serializable(value) for key, value in obj.items()}
+
+        # Handle objects with text attribute (like TextContent)
+        if hasattr(obj, "text"):
+            return {
+                "type": obj.__class__.__name__,
+                "text": obj.text,
+                "annotations": getattr(obj, "annotations", None),
+            }
+
+        # Handle other objects that might not be serializable
+        if hasattr(obj, "__dict__"):
+            return {
+                "type": obj.__class__.__name__,
+                "data": {
+                    key: self._make_serializable(value)
+                    for key, value in obj.__dict__.items()
+                },
+            }
+
+        # For basic types (str, int, float, bool) or anything else, return as-is
+        try:
+            json.dumps(obj)  # Test if it's JSON serializable
+            return obj
+        except (TypeError, ValueError):
+            # If not serializable, convert to string
+            return str(obj)
 
     def save_session_data(self, log_filename):
         """Save session data as JSON for detailed analysis"""
