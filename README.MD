@@ -23,3 +23,9 @@ Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector
 ```sh
 bash scripts/inspect.sh
 ```
+
+## Run the MCP Client
+
+```sh
+bash scripts/client.sh
+```
