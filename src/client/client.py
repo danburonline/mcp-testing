@@ -2,23 +2,35 @@ import asyncio
 from fastmcp import Client
 
 # Connect to the server using HTTP transport
-client = Client("http://localhost:8080/mcp/")  # Note the trailing slash
+client = Client("http://localhost:8080/mcp/")
 
 async def main():
     try:
-        # Now try MCP connection
+        # print("Connecting to server...")
         async with client:
-            print(f"Client connected: {client.is_connected()}")
+            # print(f"✓ Successfully connected to server")
+            # print(f"Connection status: {client.is_connected()}")
 
-            # Make MCP calls within the context
+            # List available tools
             tools = await client.list_tools()
-            print(f"Available tools: {tools}")
+            # print(f"\nFound {len(tools)} available tools:")
+            # for tool in tools:
+                # print(f"- {tool.name}: {tool.description}")
 
-            if any(tool.name == "fuzzy_add" for tool in tools):
-                result = await client.call_tool("fuzzy_add", {"a": 1, "b": 10})
-                print(f"Fuzzy add result: {result}")
+            # Test fuzzy_add
+            print("\nTesting fuzzy_add:")
+            result = await client.call_tool("fuzzy_add", {"a": 1, "b": 10})
+            print(f"Random number between 1 and 10: {result}")
 
-        print(f"Client connected: {client.is_connected()}")
+            # Test ask_gpt
+            print("\nTesting ask_gpt:")
+            result = await client.call_tool("ask_gpt", {
+                "prompt": "What is the capital of Switzerland?",
+                "model": "gpt-4o-mini"
+            })
+            print(f"GPT response: {result}")
+
+        # print("\nConnection closed successfully")
     except Exception as e:
         print(f"Error occurred: {str(e)}")
 
