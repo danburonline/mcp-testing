@@ -69,3 +69,13 @@
   - Better debugging capabilities
   - Visual inspection through the MCP Inspector tool
   - More robust communication between client and server
+
+## Step 11: Server Configuration and Example Logic Update
+
+- Reconfigured the server to run on localhost:8080.
+- Modified the MCP tool example logic to a "Fuzzy Calculator" that returns a random integer.
+
+## Step 12: Transport Protocol Update
+
+- Implemented the Python SDK.
+- Updated the Python version for improved compatibility and performance.
