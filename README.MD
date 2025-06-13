@@ -28,12 +28,6 @@ uv --version
 
 ## Environment Setup
 
-### Create and Activate Virtual Environment
-
-```sh
-uv venv
-```
-
 ## Installing all dependencies
 
 ```sh
