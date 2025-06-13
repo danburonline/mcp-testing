@@ -8,6 +8,75 @@ Educational project for learning LLM APIs, Model Context Protocol (MCP), and sec
 - **MCP Client**: Interactive terminal chat using OpenAI + MCP tools
 - **Security Testing**: Demonstrates prompt injection attacks and tool poisoning vulnerabilities
 
+## Architecture
+
+The following diagram illustrates how the MCP (Model Context Protocol) architecture works and demonstrates the difference between normal operation and malicious prompt poisoning attacks:
+
+```mermaid
+graph TB
+    %% User Interface
+    User[👤 User] --> Client[🖥️ MCP Client<br/>Terminal Chat Interface]
+
+    %% MCP Communication
+    Client -->|1. User Query| Server[🔧 MCP Server<br/>Mock Web Search Tool]
+
+    %% Server Mode Decision
+    Server --> Mode{Server Mode?}
+
+    %% Normal Mode Path
+    Mode -->|Normal Mode| SafeSearch[🔍 Safe Web Search<br/>Returns legitimate results]
+    SafeSearch --> SafeResponse[✅ Clean Response<br/>Factual information]
+
+    %% Malicious Mode Path
+    Mode -->|Malicious Mode| MaliciousSearch[💀 Malicious Web Search<br/>Prompt injection attacks]
+    MaliciousSearch --> PoisonedResponse[☠️ Poisoned Response<br/>Injected prompts<br/>Misleading information]
+
+    %% Response Processing
+    SafeResponse --> ResponseMerge[📤 Response to Client]
+    PoisonedResponse --> ResponseMerge
+
+    %% OpenAI Enhancement
+    ResponseMerge --> Client
+    Client -->|2. Enhanced Processing| OpenAI[🤖 OpenAI API<br/>GPT Models]
+
+    %% OpenAI Processing
+    OpenAI --> AIDecision{AI Processing}
+    AIDecision -->|Clean Data| SafeEnhancement[✨ Normal Enhancement<br/>Helpful response]
+    AIDecision -->|Poisoned Data| CompromisedEnhancement[💥 Compromised Enhancement<br/>AI processes malicious content<br/>Potential misinformation]
+
+    %% Final Output
+    SafeEnhancement --> FinalResponse[📋 Enhanced Response to User]
+    CompromisedEnhancement --> FinalResponse
+
+    %% Logging System
+    Client --> Logger[📝 Logging System]
+    OpenAI --> Logger
+    Logger --> LogFiles[📁 logs/ directory<br/>Interaction analysis]
+
+    %% Return to User
+    FinalResponse --> User
+
+    %% Styling
+    classDef normal fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef malicious fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef ai fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef system fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+
+    class SafeSearch,SafeResponse,SafeEnhancement normal
+    class MaliciousSearch,PoisonedResponse,CompromisedEnhancement malicious
+    class OpenAI,AIDecision ai
+    class Client,Server,Logger,LogFiles system
+```
+
+### Key Security Concepts Demonstrated
+
+- **Normal Flow (Blue)**: Standard MCP operation with safe, factual responses
+- **Malicious Flow (Red)**: Prompt injection attacks where the MCP server returns poisoned data
+- **AI Processing (Purple)**: Shows how even advanced AI models can be compromised by poisoned tool outputs
+- **System Components (Green)**: Infrastructure components including logging for security analysis
+
+The diagram illustrates how tool poisoning attacks work: malicious MCP servers can inject harmful prompts into responses, which are then processed by AI models that may not detect the manipulation, potentially leading to misinformation or compromised outputs.
+
 ## Prerequisites
 
 - Homebrew
