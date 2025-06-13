@@ -56,4 +56,8 @@ Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector
 bunx @modelcontextprotocol/inspector
 ```
 
-And select Streamable HTTP as the transport type on the left-hand panel and enter the endpoint as shown when you start the MCP server from the previous step: `http://localhost:8080/mcp`.
+And then in order to connect the inspector with the MCP server, fill in the following in the left-hand panel:
+
+- Transport type: `STDIO`
+- Command: `uv`
+- Arguments: `run src/server/main.py`
