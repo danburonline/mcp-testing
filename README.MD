@@ -50,6 +50,5 @@ bunx @modelcontextprotocol/inspector
 
 And then in order to connect the inspector with the MCP server, fill in the following in the left-hand panel:
 
-- Transport type: `STDIO`
-- Command: `uv`
-- Arguments: `run src/server/main.py`
+- Transport type: `Streamable HTTP`
+- URL: localhost:8080/mcp
