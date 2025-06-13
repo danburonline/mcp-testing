@@ -14,49 +14,30 @@ The following diagram illustrates how the MCP (Model Context Protocol) architect
 
 ```mermaid
 graph TB
-    %% User Interface
-    User["👤 User"] --> Client["🖥️ MCP Client<br/>Terminal Chat Interface"]
-
-    %% Step 1: MCP Tool Call
-    Client -->|"1. User Query"| Server["🔧 MCP Server<br/>Mock Web Search Tool"]
-
-    %% Server Mode Decision
+    User["User"] --> Client["MCP Client Terminal Chat Interface"]
+    Client -->|"User Query"| Server["MCP Server Mock Web Search Tool"]
     Server --> Mode{"Server Mode?"}
-
-    %% Normal Mode Path
-    Mode -->|"Normal Mode"| SafeSearch["🔍 Safe Web Search<br/>Returns legitimate results"]
-    SafeSearch --> SafeResponse["✅ Clean Tool Response<br/>Factual information"]
-
-    %% Malicious Mode Path
-    Mode -->|"Malicious Mode"| MaliciousSearch["💀 Malicious Web Search<br/>Prompt injection attacks"]
-    MaliciousSearch --> PoisonedResponse["☠️ Poisoned Tool Response<br/>Injected prompts<br/>Misleading information"]
-
-    %% Step 2: Tool Results Back to Client
-    SafeResponse -->|"2. Tool Results"| Client
-    PoisonedResponse -->|"2. Tool Results"| Client
-
-    %% Step 3: LLM Synthesis
-    Client -->|"3. Synthesize Response"| OpenAI["🤖 OpenAI API<br/>GPT Models"]
-
-    %% LLM Processing Decision
+    Mode -->|"Normal Mode"| SafeSearch["Safe Web Search Returns legitimate results"]
+    SafeSearch --> SafeResponse["Clean Tool Response Factual information"]
+    Mode -->|"Malicious Mode"| MaliciousSearch["Malicious Web Search Prompt injection attacks"]
+    MaliciousSearch --> PoisonedResponse["Poisoned Tool Response Injected prompts and misleading information"]
+    SafeResponse -->|"Tool Results"| Client
+    PoisonedResponse -->|"Tool Results"| Client
+    Client -->|"Synthesize Response"| OpenAI["OpenAI API GPT Models"]
     OpenAI --> AIDecision{"LLM Processing"}
-    AIDecision -->|"Clean Tool Data"| SafeSynthesis["✨ Normal Synthesis<br/>Helpful response based on clean data"]
-    AIDecision -->|"Poisoned Tool Data"| CompromisedSynthesis["💥 Compromised Synthesis<br/>LLM processes malicious content<br/>Potential misinformation output"]
-
-    %% Step 4: Final Response to User
-    SafeSynthesis -->|"4. Final Response"| User
-    CompromisedSynthesis -->|"4. Final Response"| User
-
-    %% Logging System
-    Client --> Logger["📝 Logging System"]
+    AIDecision -->|"Clean Tool Data"| SafeSynthesis["Normal Synthesis Helpful response based on clean data"]
+    AIDecision -->|"Poisoned Tool Data"| CompromisedSynthesis["Compromised Synthesis LLM processes malicious content"]
+    SafeSynthesis -->|"Final Response"| User
+    CompromisedSynthesis -->|"Final Response"| User
+    Client --> Logger["Logging System"]
     OpenAI --> Logger
-    Logger --> LogFiles["📁 logs directory<br/>Interaction analysis"]
+    Logger --> LogFiles["logs directory Interaction analysis"]
 
-    %% Styling
-    classDef normal fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef malicious fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef ai fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef system fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    %% Simplified Styling
+    classDef normal fill:#e1f5fe,stroke:#01579b
+    classDef malicious fill:#ffebee,stroke:#c62828
+    classDef ai fill:#f3e5f5,stroke:#4a148c
+    classDef system fill:#e8f5e8,stroke:#2e7d32
 
     class SafeSearch,SafeResponse,SafeSynthesis normal
     class MaliciousSearch,PoisonedResponse,CompromisedSynthesis malicious
