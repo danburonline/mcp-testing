@@ -153,3 +153,24 @@
 - Enhanced error handling throughout the application
 - Improved code organization and maintainability
 - Fixed environment variable handling in example notebooks
+
+## Step 20: Architecture Documentation and Mermaid Diagram Implementation
+
+- **Major Documentation Enhancement**: Created comprehensive Mermaid architecture diagram
+- Added visual representation of MCP (Model Context Protocol) architecture to README.md
+- Diagram illustrates complete workflow:
+  - User interaction with MCP Client
+  - Tool calls to MCP Server (normal vs malicious modes)
+  - LLM synthesis process using OpenAI API
+  - Response flow back to user with logging system
+- **Security Visualization**: Diagram clearly shows prompt poisoning attack vectors:
+  - Normal flow: Safe web search → Clean tool response → Normal synthesis
+  - Malicious flow: Poisoned web search → Compromised tool response → Compromised synthesis
+- **Multiple Syntax Fixes**: Resolved various Mermaid rendering issues:
+  - Fixed "unsupported markdown list" errors by removing `<br/>` HTML tags
+  - Corrected flow sequence to show proper LLM synthesis step
+  - Simplified node labels and edge descriptions for better compatibility
+  - Removed problematic emojis and special characters
+  - Streamlined styling classes for cleaner rendering
+- Enhanced educational value by providing visual context for security concepts
+- Positioned diagram strategically in README after project description for immediate context
