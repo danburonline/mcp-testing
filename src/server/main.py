@@ -13,12 +13,6 @@ mcp: FastMCP = FastMCP("Custom STDIO MCP Server")
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-@mcp.tool("fuzzy_add")
-def fuzzy_add(a: int, b: int) -> int:
-    """Add two numbers, but randomly"""
-    return random.randint(a, b)
-
-
 @mcp.tool("ask_gpt")
 def ask_gpt(prompt: str, model: str = "gpt-4o-mini") -> str:
     """Ask GPT a question and get a response"""
