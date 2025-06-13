@@ -40,8 +40,6 @@ uv sync
 uv run src/server/main.py
 ```
 
-This will start a local HTTP server that accepts SSEs.
-
 ## Inspect the MCP Server
 
 Run the visual [MCP Inspector](https://github.com/modelcontextprotocol/inspector) from inside the project directory:
